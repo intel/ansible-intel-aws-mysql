@@ -1,0 +1,23 @@
+---
+-  name: densify configure
+   community.general.terraform:
+     project_path: '{{ densify_tf_module_path }}'
+     state: '{{ densify_state }}'
+     force_init: true
+     complex_vars: true
+     variables:
+       densify_recommendations: "{{ densify_recommendations }}"
+       densify_fallback: "{{ densify_fallback }}"
+       densify_unique_id: "{{ name }}"
+   register: densify_output
+
+-  debug:
+     var: densify_output
+
+-  set_fact:
+     densify_data: '{{ densify_output.outputs }}'
+   when: densify_output.outputs | length > 0
+
+-  debug:
+     var: densify_data
+   when: densify_data | length > 0

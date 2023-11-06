@@ -1,0 +1,4 @@
+---
+# defaults file for intel_optimized_mysql_server_ico_by_densify
+mysql_server_tf_source: https://github.com/intel/terraform-intel-aws-mysql.git
+densify_tf_source:  https://github.com/densify-dev/terraform-null-optimization-as-code.git

@@ -1,0 +1,11 @@
+---
+-  name: Run intel_optimized_mysql_server_ico_by_densify role
+   hosts: localhost
+   tasks:
+     -  name: Running a role intel optimized mysql server ico by densify
+        ansible.builtin.import_role:
+          name: intel_optimized_mysql_server_ico_by_densify
+        vars:
+          mysql_state: absent
+          vpc_id : "vpc-091a18706e91c1f55"
+          db_password: "Calsoft#123"

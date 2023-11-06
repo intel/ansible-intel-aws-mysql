@@ -1,0 +1,40 @@
+- hosts: localhost
+  vars:
+    terraform_source: https://github.com/intel/terraform-intel-aws-mysql.git
+  tasks:
+    - set_fact:
+        terraform_module_download_path: '/home/{{ansible_env.USER}}/approach-examples/build/main/'
+
+    - name: Clone a github repository
+      git:
+        repo: '{{ terraform_source }}'
+        dest: '{{ terraform_module_download_path }}'
+        clone: yes
+        update: yes
+        version: main
+
+    - name: AWS RDS MySQL Module
+      community.general.terraform:
+        project_path: '{{ terraform_module_download_path }}'
+        state: present
+        force_init: true
+        complex_vars: true
+        # for additional variables
+        # https://github.com/intel/terraform-intel-aws-mysql/blob/main/variables.tf
+        variables:
+          vpc_id: <vpc_id>
+          db_password: <db_password>
+          db_engine: mysql
+          rds_identifier: <rds_identifier>
+          db_subnet_group_name: <db_subnet_group_name>
+          db_encryption: false
+          db_allocated_storage: 20
+          db_storage_type: "gp2"
+          db_iops : 0
+          db_max_allocated_storage: 6144
+          db_tags:
+            user: user1
+      register: mysql_output
+
+    - debug:
+        var: mysql_output

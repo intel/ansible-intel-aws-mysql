@@ -1,0 +1,11 @@
+---
+- name: Run intel_optimized_mysql_server role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server
+      vars:
+        mysql_state: present
+        db_password: "Passwort!123"
+        vpc_id: vpc-091a18706e91c1f55

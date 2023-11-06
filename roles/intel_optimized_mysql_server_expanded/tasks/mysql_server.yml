@@ -1,0 +1,24 @@
+---
+# tasks for optimized-mysql-server CURD operations
+- name: 'Check mandatory variables are defined'
+  assert:
+    that:
+      - vpc_id is defined
+      - db_password is defined
+
+# TF module "optimized-mysql-server"
+- name: Optimized mysql server
+  community.general.terraform:
+    project_path: '{{ mysql_server_tf_module_path }}'
+    state: '{{ mysql_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      vpc_id: '{{ vpc_id }}'
+      db_password: '{{ db_password }}'
+      rds_identifier: '{{ rds_identifier }}'
+      db_parameters: '{{ db_parameters }}'
+  register: mysql_output
+
+- debug:
+    var: mysql_output

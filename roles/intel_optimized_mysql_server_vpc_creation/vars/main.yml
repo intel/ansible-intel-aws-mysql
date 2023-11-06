@@ -1,0 +1,32 @@
+---
+# vars file for intel_optimized_mysql_server_vpc_creation
+# build in
+role_name: '{{ role_path | basename }}'
+
+# required
+db_password: '{{ db_password | mandatory }}'  # "Password for the master database user."
+
+# optional
+vpc_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/vpc/'
+mysql_server_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql/'
+
+## vpc
+vpc_state: present
+vpc_name: "my-vpc"
+vpc_cidr: "10.0.0.0/16"
+vpc_azs: ["us-east-2a", "us-east-2c", "us-east-2c"]
+vpc_private_subnets: ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+vpc_tags:
+  Owner: "Intel.Cloud.Optimization.Modules@intel.com"
+  Duration: "4"
+
+## mysql server
+mysql_state: present
+rds_identifier: "mysql-dev-with-vpc"
+db_multi_az: false
+db_create_subnet_group : true
+db_subnet_group_name : "intel-2-test-db-subnet-group"
+db_tags:
+  Owner: "Intel.Cloud.Optimization.Modules@intel.com"
+  Duration: "4"
+db_ingress_cidr_blocks: ["10.10.1.0/24"]

@@ -1,0 +1,45 @@
+---
+# vars file for intel_optimized_mysql_server_ico_by_densify
+# required
+db_password: '{{ db_password | mandatory }}'
+
+# optional
+region: ap-south-1
+densify_tf_module_path: '/home/ec2-user/{{ansible_env.USER}}/{{ role_name }}/terraform/ico_densify/'
+mysql_server_tf_module_path: '/home/ec2-user/{{ansible_env.USER}}/{{ role_name }}/terraform/ico_mysql_server/'
+
+#densify
+densify_state: present
+name: "mobile-app-user2"
+densify_recommendations:
+  mobile-app-user2:
+    recommendedType : "db.m4.large"
+    currentType : "db.m4.xlarge"
+    approvalType : "all"
+    savingsEstimate : "26.6"
+    predictedUptime : "94.32"
+    reservedInstanceCoverage : "yes"
+
+densify_fallback:
+  recommendedType : "db.m4.large"
+  currentType : "db.m4.large"
+  approvalType : "all"
+  savingsEstimate : "0"
+  predictedUptime : "0"
+  reservedInstanceCoverage : "no"
+
+# mysql server
+mysql_state: present
+rds_identifier: "mysql-dev-densify"
+db_tags:
+  App : "Intel Optimized Database"
+  Owner: "Intel.Cloud.Optimization.Modules@intel.com"
+  Duration: "8"
+
+
+
+
+
+
+
+

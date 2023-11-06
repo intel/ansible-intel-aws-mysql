@@ -1,0 +1,51 @@
+---
+# tasks file for intel-optimized-mysql-server-ico-by-densify
+- name: Download module
+  ansible.builtin.include_tasks:
+    file: download_tf_module.yml
+
+- name: Densify configure
+  ansible.builtin.include_tasks:
+    file: densify.yml
+
+- name: Optimized Mysql Server
+  ansible.builtin.include_tasks:
+    file: mysql_server.yml
+
+
+
+     
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
