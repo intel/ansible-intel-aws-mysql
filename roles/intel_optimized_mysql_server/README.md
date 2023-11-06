@@ -79,34 +79,11 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | <a name="input_mysql_state"></a> [mysql\_state](#input\_auto\_major\_version\_upgrades) | It specifices mysql state of given stage, choies: "planned", "present" ← (default), "absent" | `string` | `present` | no |
 
 
-## Common Exposed Inputs
-
-| Name                                                       | Description                          | Type          | Default                                                     | Required |
-|------------------------------------------------------------|--------------------------------------|---------------|-------------------------------------------------------------|:--------:|
-| <a name="input_region"></a> [region](#input\_region) | AWS Region | `string`      | `ap-south-1`                                                    | no |
-
-## VPC Exposed Inputs 
-
-| Name                                                                                            | Description                                                                                                                                       | Type          | Default                                                              | Required |
-|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------------|:--------:|
-| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name)                                    | Name of virtual private cloud                                                                                                                     | `string`      | `my-vpc`                                                             | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id)                                           | ID of virtual private cloud                                                                                                                       | `string`      | `auto`                                                               | no |
-| <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr)                                    | (Optional) The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length & ipv4_ipam_pool_id | `string`      | `10.0.0.0/16`                                                        | no |
-| <a name="input_vpc_azs"></a> [vpc\_azs](#input\_vpc\_azs)                                       | A list of availability zones names or ids in the region                                                                                           | `list(string)`      | `["ap-south-2a", "ap-south-2b", "ap-south-2c"]`                      | no |
-| <a name="input_vpc_private_subnets"></a> [vpc\_private\_subnets](#input\_vpc\_private\_subnets) | List of IDs of private subnets                                                                                                                    | `list(string)` | `["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]`                      | no |
-| <a name="input_vpc_tags"></a> [vpc\_tags](#input\_vpc\_tags)                                    | A map of tags to add to all resources                                                                                                             | `map(string)` | `{Owner: "Intel.Cloud.Optimization.Modules@intel.com", Duration: "4"}` | no |
-
 ## MySQL Exposed Inputs
 
 | Name                                                                                               | Description                                                                                                                                                                                                                              | Type          | Default                                                                  | Required |
 |----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------|:--------:|
 | <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `mysql-dev-with-vpc`                                                                 | no |
-| <a name="input_db_multi_az"></a> [db\_multi\_az](#input\_db\_multi\_az)                            | Flag that specifies if the RDS instance is multi_az.                                                                                                                 | `bool`        | `true`                                                                   | no |
-| <a name="input_db_create_subnet_group"></a> [db\_create\_subnet\_group](#input\_db\_create\_subnet\_group)          | Flag that allows for the creation of a subnet group that allows public access.                                                                                                                                                           | `bool`        | `true`                                                                   | no |
-| <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | Database subnet group name.                                                                                                                                                                                                   | `string`      | `intel-2-test-db-subnet-group`                                           | no |
-| <a name="input_db_tags"></a> [db\_tags](#input\_db\_tags)                                         | Map of tags to apply to the database instance.                                                                                                                                                                                           | `map(string)` | `"{Owner: "Intel.Cloud.Optimization.Modules@intel.com", Duration: "4"}"` | no |
-| <a name="input_db_ingress_cidr_blocks"></a> [db\_ingress\_cidr\_blocks](#input\_db\_ingress\_cidr\_blocks)         | Ingress CIDR block for the RDS security group.                                                                                                                                                                                           | `list(string)` | `"["10.10.1.0/24"]"`                                                     | no |
-
 
 ## MySQL Terraform Extended Inputs
  Below Input variables can be used to extend variables in role, Add or update variable in vars/main.yml file
@@ -250,5 +227,3 @@ roles/intel_optimized_mysql_server_vpc_creation/tasks/mysql_server.yml
 | <a name="output_instance_class"></a> [instance\_class](#output\_instance\_class) | Instance class in use for the database instance that was created. |
 <!-- END_TF_DOCS -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## VPC Terraform Extended Inputs - [Click here](<https://github.com/terraform-aws-modules/terraform-aws-vpc/blob/master/README.md#inputs>) 
