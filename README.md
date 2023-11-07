@@ -14,9 +14,146 @@ As you configure your application's environment, choose the configurations for y
 
 The MySQL Optimizations were based off [Intel Xeon Tuning Guide](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
-### Explain Ansible collection
+### Explained Ansible AWS RDS MySQL collection
+This collection included 5 roles and 6 playbooks.
+
+**Role**:- Ansible roles are a way to reuse and organize your Ansible code. They are self-contained units that contain all the files and configuration needed to automate a specific task.
+Roles are defined using a directory structure with specific directories for tasks, variables, files, templates, and other artifacts. This structure makes it easy to find and reuse code, and it also makes it easy to extend behaviour of roles.
+
+To use a role in an Ansible playbook, you simply need to list it in the roles section of the playbook. Ansible will then automatically load the role and execute its tasks.
+
+For this module, There are 5 roles.
+1. <a name="intel_optimized_mysql_server"> intel_optimized_mysql_server</a> - It creates an Amazon RDS Intel optimized instance for MySQL
+2. <a name="intel_optimized_mysql_server_expanded"> intel_optimized_mysql_server_expanded</a> It creates an Amazon RDS instance for MySQL and optimizes the database parameter innodb_open_files
+3. <a name="input_intel_optimized_mysql_server_ico_by_densify"> input_intel_optimized_mysql_server_ico_by_densify</a> It creates an Amazon RDS Intel optimized instance for MySQL using recommended instance from Intel Cloud Optimizer by Densify
+4. <a name="intel_optimized_mysql_server_vpc_creation"> intel_optimized_mysql_server_vpc_creation</a> It creates an Amazon RDS instance for MySQL and a new VPC
+5. <a name="intel_optimized_mysql_server_replica_testing"> intel_optimized_mysql_server_replica_testing</a> It creates an Amazon RDS instance for MySQL and creates a read replica.
+
+**
+****Playbook**:- An Ansible playbook is a YAML file that describes the tasks, are composed of a series of plays, which are groups of tasks that are executed in a specific order. Each play defines a set of tasks that should be executed on a specific group of hosts.
+         Playbooks can also include variables, which can be used to store data that is used by the tasks. This makes it easy to reuse playbooks for different environments and configurations.
+         for this module. 
+For this module, There are 6 playbooks, Where
+1. Playbook **intel_aws_mysql.yml** - Used to create an Amazon RDS Intel optimized instance for MySQL, it uses Terraform module **terraform-intel-aws-mysql** and being called by Ansible module community.general.terraform
+2. Playbook **intel_optimized_mysql_server.yml** - It executes role called [intel_optimized_mysql_server](#intel_optimized_mysql_server)
+3. Playbook **intel-optimized_mysql_ico_by_densify.yml** - It executes role called [intel-optimized-mysql-ico-by-densify](#intel-optimized-mysql-ico-by-densify)
+4. Playbook **intel_optimized_mysql_server_vpc_creation.yml** - It executes role called [intel_optimized_mysql_server_vpc_creation](#intel_optimized_mysql_server_vpc_creation)
+5. Playbook **intel_optimized_mysql_server.yml** - It executes role called [intel_optimized_mysql_server](#intel_optimized_mysql_server)
+6. Playbook **intel_optimized_mysql_server_replica_testing.yml**:- It executes role called [intel_optimized_mysql_server_replica_testing](#intel_optimized_mysql_server_replica_testing)
+
+```bash
+├── playbooks
+│   ├── intel_aws_mysql.yml
+│   ├── intel-optimized-mysql-ico-by-densify.yml
+│   ├── intel_optimized_mysql_server_expanded.yml
+│   ├── intel_optimized_mysql_server_vpc_creation.yml
+│   └── intel_optimized_mysql_server.yml
+└── roles
+    ├── intel_optimized_mysql_server
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── README.md
+    │   ├── tasks
+    │   │   ├── download_tf_module.yml
+    │   │   ├── main.yml
+    │   │   ├── mysql_server.yml
+    │   │   ├── ouput.yml
+    │   │   └── output.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── intel_optimized_mysql_server_expanded
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── README.md
+    │   ├── tasks
+    │   │   ├── download_tf_module.yml
+    │   │   ├── main.yml
+    │   │   ├── mysql_server.yml
+    │   │   ├── ouput.yml
+    │   │   └── output.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── intel_optimized_mysql_server_ico_by_densify
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── README.md
+    │   ├── tasks
+    │   │   ├── densify.yml
+    │   │   ├── download_tf_module.yml
+    │   │   ├── main.yml
+    │   │   ├── mysql_server.yml
+    │   │   └── output.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── intel_optimized_mysql_server_replica_testing
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── README.md
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── intel_optimized_mysql_server_vpc_creation
+        ├── defaults
+        │   └── main.yml
+        ├── files
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── README.md
+        ├── tasks
+        │   ├── download_tf_module.yml
+        │   ├── main.yml
+        │   ├── mysql_server.yml
+        │   ├── output.yml
+        │   ├── validate_vars.yml
+        │   └── vpc.yml
+        ├── templates
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
 
 
+```
 
 ## Installation of collection
 
@@ -148,7 +285,6 @@ ansible-playbook intel_aws_mysql.yml
       vpc_id: <vpc_id>
       db_password: <db_password>
 ```
-
 ## See roles folder for complete examples
 
 | Role Name                                                                                                                                                          |
