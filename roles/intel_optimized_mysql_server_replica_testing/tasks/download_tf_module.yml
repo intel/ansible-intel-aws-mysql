@@ -1,0 +1,17 @@
+---
+# tasks file for cloning terraform modules
+- name: Clone a github repository {{ mysql_server_tf_source|basename }}
+  ansible.builtin.git:
+    repo: '{{ mysql_server_tf_source }}'
+    dest: '{{ mysql_server_tf_module_path }}'
+    clone: yes
+    update: yes
+    version: main
+
+- name: Clone a github repository {{ mysql_server_tf_source|basename }}
+  ansible.builtin.git:
+    repo: '{{ mysql_server_tf_source }}'
+    dest: '{{ mysql_server_tf_module_path_replica }}'
+    clone: yes
+    update: yes
+    version: main    

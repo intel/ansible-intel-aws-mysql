@@ -1,2 +1,12 @@
 ---
-# tasks file for intel_optimized_mysql_server_replica_testing
+- name: Download Terraform modules
+  ansible.builtin.include_tasks:
+    file: download_tf_module.yml 
+
+- name: Optimized Mysql Server
+  ansible.builtin.include_tasks:
+    file: mysql.yml
+
+- name: optimized mysql server read replica
+  ansible.builtin.include_tasks:
+    file: mysql_replica.yml   

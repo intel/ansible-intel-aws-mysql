@@ -1,2 +1,18 @@
 ---
-# vars file for intel_optimized_mysql_server_replica_testing
+# vars file for intel_optimized_mysql_server_vpc_creation
+# build in
+role_name: '{{role_path|basename}}'
+
+# required
+db_password: '{{ db_password | mandatory }}'  # "Password for the master database user."
+
+# optional
+region: ap-south-1 # "Target AWS region to deploy workloads in."
+#vpc_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/vpc/'
+mysql_server_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql/'
+mysql_server_tf_module_path_replica: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql_replica/'
+# mysql
+rds_identifier: "mysql-dev"
+# mysql_replica
+rds_identifier_replica: "mysql-dev1"
+

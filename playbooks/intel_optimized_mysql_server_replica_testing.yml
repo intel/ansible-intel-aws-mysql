@@ -1,0 +1,12 @@
+---
+- name: Run intel_optimized_mysql_server_replica_testing role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel_optimized_mysql_server_replica_testing creation
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_replica_testing
+      vars:
+        mysql_state: present
+        mysql_rep_state: present
+        db_password: "Passwort!123"
+        vpc_id: "vpc-091a18706e91c1f55"
