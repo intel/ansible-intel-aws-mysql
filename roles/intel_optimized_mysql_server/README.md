@@ -37,7 +37,7 @@ There are three ways to use it.
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_vpc_creation role as below
-```ansible
+```yaml
 ---
 - name: Run intel_optimized_mysql_server role
   hosts: localhost
@@ -54,6 +54,44 @@ Use below Command:
 ```commandline
 ansible-playbook intel_optimized_mysql_server.yml
 ```
+
+## Run Ansible with Different State
+#### State - present (terraform apply)
+```yaml
+- name: Run intel_optimized_mysql_server role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server
+      vars:
+        mysql_state: present
+        db_password: "Passwort!123"
+        vpc_id: <vpc_id>
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server.yml
+```
+
+#### State - absent (terraform destroy)
+```yaml
+- name: Run intel_optimized_mysql_server role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server
+      vars:
+        mysql_state: absent
+        db_password: "Passwort!123"
+        vpc_id: <vpc_id>
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server.yml
+```
+
 Requirements
 ------------
 | Name                                                                               | Version  |

@@ -4,7 +4,7 @@
 
 # Intel® Cloud Optimization Modules for Terraform
 
-© Copyright 2022, Intel Corporation
+© Copyright 2023, Intel Corporation
 
 ## AWS RDS MySQL module - Expanded Parameters Example
 
@@ -37,7 +37,7 @@ There are three ways to use it.
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_vpc_creation role as below
-```ansible
+```yaml
 ---
 - name: Run intel_optimized_mysql_server_expanded role
   hosts: localhost
@@ -48,12 +48,50 @@ Use playbook to run intel_optimized_mysql_server_vpc_creation role as below
       vars:
         mysql_state: present
         db_password: "Passwort!123"
-        vpc_id: vpc-091a18706e91c1f55
+        vpc_id: <vpc_id>
 ```
 Use below Command:
 ```commandline
 ansible-playbook intel_optimized_mysql_server_expanded.yml
 ```
+
+## Run Ansible with Different State
+#### State - present (terraform apply)
+```yaml
+- name: Run intel_optimized_mysql_server_expanded role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server expanded
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_expanded
+      vars:
+        mysql_state: present
+        db_password: "Passwort!123"
+        vpc_id: <vpc_id>
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server_expanded.yml
+```
+
+#### State - absent (terraform destroy)
+```yaml
+- name: Run intel_optimized_mysql_server_expanded role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server expanded
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_expanded
+      vars:
+        mysql_state: absent
+        db_password: "Passwort!123"
+        vpc_id: <vpc_id>
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server_expanded.yml
+```
+
 Requirements
 ------------
 | Name                                                                               | Version  |

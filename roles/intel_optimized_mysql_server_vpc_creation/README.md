@@ -37,7 +37,7 @@ There are three ways to use it.
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_vpc_creation role as below
-```ansible
+```yaml
 ---
 - name: Run intel_optimized_mysql_server_vpc_creation role
   hosts: localhost
@@ -54,6 +54,67 @@ Use below Command:
 ```commandline
 ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
 ```
+
+## Run Ansible with Different State
+#### State - present (terraform apply)
+```yaml
+- name: Run intel_optimized_mysql_server_vpc_creation role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server with vpc creation
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_vpc_creation
+      vars:
+        vpc_state: present
+        mysql_state: present
+        db_password: "Passwort!123"
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
+```
+
+#### State - absent (terraform destroy)
+> [!WARNING]  
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), we need to delete resources in sequential order.
+> For this role, vpc is created and assigned to mysql instance, so while delete resources, needs to be deleted in sequential order, In this role, deleting mysql instance and then vpc.
+
+#### Step 1: Deleting MySQL Instance 
+```yaml
+- name: Run intel_optimized_mysql_server_vpc_creation role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server with vpc creation
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_vpc_creation
+      vars:
+        vpc_state: present
+        mysql_state: absent
+        db_password: "Passwort!123"
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
+```
+
+#### Step 2: Deleting VPC Instance 
+```yaml
+- name: Run intel_optimized_mysql_server_vpc_creation role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel optimized mysql server with vpc creation
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_vpc_creation
+      vars:
+        vpc_state: absent
+        mysql_state: absent
+        db_password: "Passwort!123"
+```
+Use below Command:
+```commandline
+ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
+```
+
 Requirements
 ------------
 | Name                                                                               | Version  |
