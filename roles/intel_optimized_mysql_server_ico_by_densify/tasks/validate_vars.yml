@@ -1,0 +1,3 @@
+---
+-  set_fact:
+     validate_inputs: vpc_id is defined and db_password is defined and densify_data is defined
