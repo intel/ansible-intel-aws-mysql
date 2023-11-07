@@ -11,11 +11,12 @@
 - name: Optimized Mysql Server
   ansible.builtin.include_tasks:
     file: mysql_server.yml
-  when: vpc_id is defined and db_password is defined and densify_data is defined 
+  when: vpc_id is defined and db_password is defined and densify_data is defined    
 
-  
-
-
+- name: output
+  ansible.builtin.include_tasks:
+    file: output.yml
+  when: mysql_state == "present"
 
      
    
