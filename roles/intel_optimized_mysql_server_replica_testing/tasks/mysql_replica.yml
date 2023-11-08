@@ -7,7 +7,7 @@
     complex_vars: true
     variables:
       rds_identifier: "{{ rds_identifier_replica }}"
-      db_password: "{{ db_password_replica }}"
+      db_password: "{{ db_password }}"
       vpc_id: "{{ vpc_id }}"
       db_replicate_source_db: "{{ db_instance_id }}"
       kms_key_id: "{{ db_kms_key_id }}"

@@ -6,10 +6,8 @@
       ansible.builtin.import_role:
         name: intel_optimized_mysql_server_replica_testing
       vars:
-        mysql_state: present
-        mysql_rep_state: present
+        mysql_state: absent
+        mysql_rep_state: absent
         db_password: "Passwort!123"
-        db_password_replica: "Passwort!123"
-        vpc_id: "vpc-091a18706e91c1f55"
-        skip_final_snapshot: true
-        create_subnet_group: false
+        vpc_id: " "
+        

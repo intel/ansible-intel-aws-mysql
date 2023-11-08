@@ -1,44 +1,20 @@
 ---
 - set_fact:
-    mysql_server_instance : '{{ mysql_output.outputs }}'
-  when: mysql_output.outputs | length > 0
-
-- set_fact:
     mysql_replica_server_instance : '{{ mysql_replica_output.outputs }}'
   when: mysql_replica_output.outputs | length > 0
 
 - name: Validating mysql server output
   fail:
     msg: "mysql server instance got an error"
-  when: mysql_output.outputs | length == 0 or mysql_replica_output.outputs | length == 0 
+  when: mysql_replica_output.outputs | length == 0 
   
-
-- name: Displaying mysql output
-  ansible.builtin.debug:
-    msg:
-    - "mysql_address: {{ mysql_server_instance.db_hostname.value }}"
-    - "mysql_port: '{{ mysql_server_instance.db_port.value }}'"
-    - "mysql_username: '{{ mysql_server_instance.db_username.value }}'"
-    - "mysql_password: '{{ mysql_server_instance.db_password.value }}'"
-    - "mysql_endpoint: '{{ mysql_server_instance.db_endpoint.value }}'"
-    - "mysql_engine: '{{ mysql_server_instance.db_engine.value }}'"
-    - "mysql_status: '{{ mysql_server_instance.db_status.value }}'"
-    - "instance_class: '{{ mysql_server_instance.instance_class.value }}'"
-    - "mysql_allocated_storage: '{{ mysql_server_instance.db_allocated_storage.value }}'"
-    - "mysql_max_allocated_storage: '{{ mysql_server_instance.db_max_allocated_storage.value }}'"
-    - "mysql_arn: '{{ mysql_server_instance.db_arn.value }}'"
-    - "mysql_kms_key_id: '{{ mysql_server_instance.db_kms_key_id.value }}'"
-    - "mysql_backup_window: '{{ mysql_server_instance.db_backup_window.value }}'"
-    - "mysql_maintenance_window: '{{ mysql_server_instance.db_maintenance_window.value }}'"
-    - "mysql_db_name: '{{ mysql_server_instance.db_name.value }}'"
-
 - name: Displaying mysql replica output
   ansible.builtin.debug:
     msg:
     - "replica_mysql_address: {{ mysql_replica_server_instance.db_hostname.value }}"
     - "replica_mysql_port: '{{ mysql_replica_server_instance.db_port.value }}'"
     - "replica_mysql_username: '{{ mysql_replica_server_instance.db_username.value }}'"
-    - "replica_mysql_password: '{{ mysql_replica_server_instance.db_password.value }}'"
+   #- "replica_mysql_password: '{{ mysql_replica_server_instance.db_password.value }}'"
     - "replica_mysql_endpoint: '{{ mysql_replica_server_instance.db_endpoint.value }}'"
     - "replica_mysql_engine: '{{ mysql_replica_server_instance.db_engine.value }}'"
     - "replica_mysql_status: '{{ mysql_replica_server_instance.db_status.value }}'"

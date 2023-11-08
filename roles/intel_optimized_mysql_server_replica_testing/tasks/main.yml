@@ -10,10 +10,18 @@
 
 - name: optimized mysql server read replica
   ansible.builtin.include_tasks:
-    file: mysql_replica.yml   
+    file: mysql_replica.yml  
+  when: vpc_id is defined and db_password is defined and db_instance_id is defined and db_kms_key_id is defined
 
-- name: Output
+- name: mysql Output
   ansible.builtin.include_tasks:
-    file: output.yml
-  when: 'mysql_state == "present" and mysql_rep_state == "present"'
+    file: mysql_output.yml
+  when: 'mysql_state == "present"'
+
+- name: mysql replica Output
+  ansible.builtin.include_tasks:
+    file: mysql_rep_output.yml
+  when: 'mysql_rep_state == "present"' 
+
+
    
