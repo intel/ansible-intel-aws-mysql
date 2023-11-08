@@ -16,24 +16,28 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Installation of `intel_optimized_mysql_server_expanded` role
 
-There are three ways to use it.
-1. Install collection using Ansible Galaxy (Use as third party collection, installed in default location), Use below command to installed collection
+### Below are ways to `How to install and use it`
+
+1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
+   from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
    
-2. Install collection using Ansible Galaxy (Installed in given location), Use below command to installed collection
-    ```commandline
-    ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
-    ```
-    Note: collection will download all roles, you can remove as per need
+2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
+   Use below approaches
+   1.
+       ```commandline
+       ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
+       ```
+       Note: collection will download collection, you can remove as per need
 
-3. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
-    ```commandline
-    git clone <TBD>
-    cd ansible-intel-aws-mysql
-    cp -r role/intel_optimized_mysql_server_vpc_creation /<your project path>/
-    ```
+   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+       ```commandline
+       git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
+       cd ansible-intel-aws-mysql
+       cp -r role/intel_optimized_mysql_server_vpc_creation /<your project path>/
+       ```
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_vpc_creation role as below

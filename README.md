@@ -158,7 +158,7 @@ For this module, There are 6 playbooks, Where
 ## Installation of collection
 
 ### Below are ways to `How to install and use it`
-.   
+
 1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
