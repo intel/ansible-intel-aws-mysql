@@ -5,6 +5,7 @@ role_name: '{{role_path|basename}}'
 
 # required
 db_password: '{{ db_password | mandatory }}'  # "Password for the master database user."
+#db_password_replica: '{{ db_password_replica | mandatory }}'  # "Password for the master database user." 
 
 # optional
 region: ap-south-1 # "Target AWS region to deploy workloads in."
@@ -13,6 +14,10 @@ mysql_server_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terrafo
 mysql_server_tf_module_path_replica: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql_replica/'
 # mysql
 rds_identifier: "mysql-dev"
+mysql_state: present
 # mysql_replica
 rds_identifier_replica: "mysql-dev1"
+mysql_rep_state: present
+skip_final_snapshot: true
+create_subnet_group: false
 
