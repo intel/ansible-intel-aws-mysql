@@ -120,12 +120,18 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 |----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------|-----------|:--------:|
 | <a name="input_mysql_state"></a> [mysql\_state](#input\_auto\_major\_version\_upgrades) | It specifices mysql state of given stage, choies: "planned", "present" ← (default), "absent" | `string` | `present` | no |
 
+## VPC Exposed Inputs
+
+| Name                                                                                            | Description                                                                                                                                       | Type          | Default | Required |
+|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------|---------|:--------:|
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id)                                           | ID of virtual private cloud                                                                                                                       | `string`      | `null`  |   yes    |
 
 ## MySQL Exposed Inputs
 
-| Name                                                                                               | Description                                                                                                                                                                                                                              | Type          | Default                                                                  | Required |
-|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------|:--------:|
-| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `mysql-dev-with-vpc`                                                                 | no |
+| Name                                                                      | Description                                                                                                                                                                                                                              | Type          | Default              | Required |
+|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|----------------------|:--------:|
+| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier) | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `mysql-dev-with-vpc` |    no    |
+| <a name="input_db_password"></a> [db\_password](#input\db\_password)   | MySQL instance master password.                                                                                                                                                                                          | `string`      | `null`               |    yes    |
 
 ## MySQL Terraform Extended Inputs
  Below Input variables can be used to extend variables in role, Add or update variable in vars/main.yml file
