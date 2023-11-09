@@ -103,7 +103,7 @@ ansible-playbook intel_optimized_mysql_server_replica_testing.yml
 > [!WARNING]  
 > When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
 > it needs be deleted resources in sequential order.
-> This role creates a VPC and assigns it to a MySQL instance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL instance being deleted first and the VPC being deleted second.
+> This role creates MySQL instance and MySQL Replica intance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL Replica instance being deleted first and the MySql intance being deleted second.
 
 #### Step 2: Deleting MYSQL server
 ```yaml
