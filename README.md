@@ -42,115 +42,124 @@ For this module, There are 6 playbooks, Where
 6. Playbook **intel_optimized_mysql_server_replica_testing.yml**:- It executes role called [intel_optimized_mysql_server_replica_testing](#intel_optimized_mysql_server_replica_testing)
 
 ```bash
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── galaxy.yml
 ├── playbooks
 │   ├── intel_aws_mysql.yml
-│   ├── intel-optimized-mysql-ico-by-densify.yml
 │   ├── intel_optimized_mysql_server_expanded.yml
+│   ├── intel_optimized_mysql_server_ico_by_densify.yml
+│   ├── intel_optimized_mysql_server_replica_testing.yml
 │   ├── intel_optimized_mysql_server_vpc_creation.yml
 │   └── intel_optimized_mysql_server.yml
-└── roles
-    ├── intel_optimized_mysql_server
-    │   ├── defaults
-    │   │   └── main.yml
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   │   └── main.yml
-    │   ├── README.md
-    │   ├── tasks
-    │   │   ├── download_tf_module.yml
-    │   │   ├── main.yml
-    │   │   ├── mysql_server.yml
-    │   │   ├── ouput.yml
-    │   │   └── output.yml
-    │   ├── templates
-    │   ├── tests
-    │   │   ├── inventory
-    │   │   └── test.yml
-    │   └── vars
-    │       └── main.yml
-    ├── intel_optimized_mysql_server_expanded
-    │   ├── defaults
-    │   │   └── main.yml
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   │   └── main.yml
-    │   ├── README.md
-    │   ├── tasks
-    │   │   ├── download_tf_module.yml
-    │   │   ├── main.yml
-    │   │   ├── mysql_server.yml
-    │   │   ├── ouput.yml
-    │   │   └── output.yml
-    │   ├── templates
-    │   ├── tests
-    │   │   ├── inventory
-    │   │   └── test.yml
-    │   └── vars
-    │       └── main.yml
-    ├── intel_optimized_mysql_server_ico_by_densify
-    │   ├── defaults
-    │   │   └── main.yml
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   │   └── main.yml
-    │   ├── README.md
-    │   ├── tasks
-    │   │   ├── densify.yml
-    │   │   ├── download_tf_module.yml
-    │   │   ├── main.yml
-    │   │   ├── mysql_server.yml
-    │   │   └── output.yml
-    │   ├── templates
-    │   ├── tests
-    │   │   ├── inventory
-    │   │   └── test.yml
-    │   └── vars
-    │       └── main.yml
-    ├── intel_optimized_mysql_server_replica_testing
-    │   ├── defaults
-    │   │   └── main.yml
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   │   └── main.yml
-    │   ├── README.md
-    │   ├── tasks
-    │   │   └── main.yml
-    │   ├── templates
-    │   ├── tests
-    │   │   ├── inventory
-    │   │   └── test.yml
-    │   └── vars
-    │       └── main.yml
-    └── intel_optimized_mysql_server_vpc_creation
-        ├── defaults
-        │   └── main.yml
-        ├── files
-        ├── handlers
-        │   └── main.yml
-        ├── meta
-        │   └── main.yml
-        ├── README.md
-        ├── tasks
-        │   ├── download_tf_module.yml
-        │   ├── main.yml
-        │   ├── mysql_server.yml
-        │   ├── output.yml
-        │   ├── validate_vars.yml
-        │   └── vpc.yml
-        ├── templates
-        ├── tests
-        │   ├── inventory
-        │   └── test.yml
-        └── vars
-            └── main.yml
+├── README.md
+├── requirements.yml
+├── roles
+│   ├── intel_optimized_mysql_server
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── files
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   ├── download_tf_module.yml
+│   │   │   ├── main.yml
+│   │   │   ├── mysql_server.yml
+│   │   │   └── output.yml
+│   │   ├── templates
+│   │   ├── tests
+│   │   │   ├── inventory
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   ├── intel_optimized_mysql_server_expanded
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── files
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   ├── download_tf_module.yml
+│   │   │   ├── main.yml
+│   │   │   ├── mysql_server.yml
+│   │   │   └── output.yml
+│   │   ├── templates
+│   │   ├── tests
+│   │   │   ├── inventory
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   ├── intel_optimized_mysql_server_ico_by_densify
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── files
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   ├── densify.yml
+│   │   │   ├── download_tf_module.yml
+│   │   │   ├── main.yml
+│   │   │   ├── mysql_server.yml
+│   │   │   └── output.yml
+│   │   ├── templates
+│   │   ├── tests
+│   │   │   ├── inventory
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   ├── intel_optimized_mysql_server_replica_testing
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── files
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   ├── download_tf_module.yml
+│   │   │   ├── main.yml
+│   │   │   ├── mysql_output.yml
+│   │   │   ├── mysql_replica.yml
+│   │   │   ├── mysql_rep_output.yml
+│   │   │   └── mysql.yml
+│   │   ├── templates
+│   │   ├── tests
+│   │   │   ├── inventory
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   └── intel_optimized_mysql_server_vpc_creation
+│       ├── defaults
+│       │   └── main.yml
+│       ├── files
+│       ├── handlers
+│       │   └── main.yml
+│       ├── meta
+│       │   └── main.yml
+│       ├── README.md
+│       ├── tasks
+│       │   ├── download_tf_module.yml
+│       │   ├── main.yml
+│       │   ├── mysql_server.yml
+│       │   ├── output.yml
+│       │   └── vpc.yml
+│       ├── templates
+│       ├── tests
+│       │   ├── inventory
+│       │   └── test.yml
+│       └── vars
+│           └── main.yml
+└── security.md
 
 ```
 
