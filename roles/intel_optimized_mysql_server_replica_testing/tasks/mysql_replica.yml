@@ -1,0 +1,21 @@
+---
+- name: optimized mysql server read replica
+  community.general.terraform:
+    project_path: '{{ mysql_server_tf_module_path_replica }}'
+    state: '{{ mysql_rep_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      rds_identifier: "{{ rds_identifier_replica }}"
+      db_password: "{{ db_password }}"
+      vpc_id: "{{ vpc_id }}"
+      db_replicate_source_db: "{{ db_instance_id }}"
+      kms_key_id: "{{ db_kms_key_id }}"
+      skip_final_snapshot: true
+      create_subnet_group: false
+  register: mysql_replica_output 
+
+- debug:
+    var: mysql_replica_output
+
+

@@ -1,0 +1,28 @@
+---
+- set_fact:
+    mysql_replica_server_instance : '{{ mysql_replica_output.outputs }}'
+  when: mysql_replica_output.outputs | length > 0
+
+- name: Validating mysql server output
+  fail:
+    msg: "mysql server instance got an error"
+  when: mysql_replica_output.outputs | length == 0 
+  
+- name: Displaying mysql replica output
+  ansible.builtin.debug:
+    msg:
+    - "replica_mysql_address: {{ mysql_replica_server_instance.db_hostname.value }}"
+    - "replica_mysql_port: '{{ mysql_replica_server_instance.db_port.value }}'"
+    - "replica_mysql_username: '{{ mysql_replica_server_instance.db_username.value }}'"
+   #- "replica_mysql_password: '{{ mysql_replica_server_instance.db_password.value }}'"
+    - "replica_mysql_endpoint: '{{ mysql_replica_server_instance.db_endpoint.value }}'"
+    - "replica_mysql_engine: '{{ mysql_replica_server_instance.db_engine.value }}'"
+    - "replica_mysql_status: '{{ mysql_replica_server_instance.db_status.value }}'"
+    - "replica_instance_class: '{{ mysql_replica_server_instance.instance_class.value }}'"
+    - "replica_mysql_allocated_storage: '{{ mysql_replica_server_instance.db_allocated_storage.value }}'"
+    - "replica_mysql_max_allocated_storage: '{{ mysql_replica_server_instance.db_max_allocated_storage.value }}'"
+    - "replica_mysql_arn: '{{ mysql_replica_server_instance.db_arn.value }}'"
+    - "replica_mysql_kms_key_id: '{{ mysql_replica_server_instance.db_kms_key_id.value }}'"
+    - "replica_mysql_backup_window: '{{ mysql_replica_server_instance.db_backup_window.value }}'"
+    - "replica_mysql_maintenance_window: '{{ mysql_replica_server_instance.db_maintenance_window.value }}'"
+    - "replica_mysql_db_name: '{{ mysql_replica_server_instance.db_name.value }}'"

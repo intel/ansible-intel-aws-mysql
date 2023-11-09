@@ -1,2 +1,27 @@
 ---
-# tasks file for intel_optimized_mysql_server_replica_testing
+- name: Download Terraform modules
+  ansible.builtin.include_tasks:
+    file: download_tf_module.yml 
+
+- name: Optimized Mysql Server
+  ansible.builtin.include_tasks:
+    file: mysql.yml
+  when: vpc_id is defined and db_password is defined
+
+- name: optimized mysql server read replica
+  ansible.builtin.include_tasks:
+    file: mysql_replica.yml  
+  when: vpc_id is defined and db_password is defined and db_instance_id is defined and db_kms_key_id is defined
+
+- name: mysql Output
+  ansible.builtin.include_tasks:
+    file: mysql_output.yml
+  when: 'mysql_state == "present"'
+
+- name: mysql replica Output
+  ansible.builtin.include_tasks:
+    file: mysql_rep_output.yml
+  when: 'mysql_rep_state == "present"' 
+
+
+   
