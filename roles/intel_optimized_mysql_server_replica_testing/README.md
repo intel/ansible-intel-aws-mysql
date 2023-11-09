@@ -33,7 +33,7 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
-       cp -r role/intel_optimized_mysql_server_replica_testingon /<your project path>/
+       cp -r role/intel_optimized_mysql_server_replica_testing /<your project path>/
        ``` 
 
 ## Usage
