@@ -105,6 +105,12 @@ Use below Command:
 ```commandline
 ansible-playbook intel_optimized_mysql_server_ico_by_densify.yml
 ```
+#### State - absent (terraform destroy)
+> [!WARNING]  
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
+> it needs be deleted resources in sequential order.
+> This role creates a densify and assigns it to a MySQL instance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL instance being deleted first and the densify being deleted second.
+
 #### Step 1: Deleting MySQL server 
 ```yaml
 - name: Run intel_optimized_mysql_server role
