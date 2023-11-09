@@ -36,24 +36,28 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Installation of `intel_optimized_mysql_server_ico_by_densify` role
 
-There are three ways to use it.
-1. Install collection using Ansible Galaxy (Use as third party collection, installed in default location), Use below command to installed collection
+### Below are ways to `How to install and use it`
+
+1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
+   from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
    
-2. Install collection using Ansible Galaxy (Installed in given location), Use below command to installed collection
-    ```commandline
-    ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
-    ```
-    Note: collection will download all roles, you can remove as per need
+2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
+   Use below approaches
+   1.
+       ```commandline
+       ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
+       ```
+       Note: collection will download collection, you can remove as per need
 
-3. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
-    ```commandline
-    git clone <TBD>
-    cd ansible-intel-aws-mysql
-    cp -r role/intel_optimized_mysql_server_ico_by_densify /<your project path>/
-    ```
+   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+       ```commandline
+       git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
+       cd ansible-intel-aws-mysql
+       cp -r role/intel_optimized_mysql_server_ico_by_densify /<your project path>/
+       ```
 
 ## Usage
 
@@ -69,7 +73,7 @@ Use playbook to intel_optimized_mysql_server_ico_by_densify role as below
         vars:
           densify_state: present
           mysql_state: absent
-          vpc_id : "vpc-091a18706e91c1f55"
+          vpc_id : "XXXX"
           db_password: "Calsoft#123"
           rds_identifier: "mysql-dev-densify"
 ```
@@ -110,10 +114,10 @@ ansible-playbook intel_optimized_mysql_server_ico_by_densify.yml
         name: intel_optimized_mysql_server_ico_by_densify
       vars:
         densify_state: present
-          mysql_state: absent
-          vpc_id : "XXXX"
-          db_password: "Password#123"
-          rds_identifier: "Demo"
+        mysql_state: absent
+        vpc_id : "XXXX"
+        db_password: "Password#123"
+        rds_identifier: "Demo"
 ```
 Use below Command:
 ```commandline
@@ -129,10 +133,10 @@ ansible-playbook intel_optimized_mysql_server_ico_by_densify.yml
         name: intel_optimized_mysql_server_ico_by_densify
       vars:
         densify_state: absent
-          mysql_state: present
-          vpc_id : "XXXX"
-          db_password: "Password#123"
-          rds_identifier: "Demo"
+        mysql_state: absent
+        vpc_id : "XXXX"
+        db_password: "Password#123"
+        rds_identifier: "Demo"
 ```
 Use below Command:
 ```commandline
@@ -162,12 +166,12 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 |----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------|-----------|:--------:|
 | <a name="input_mysql_state"></a> [densify\_state](#input\_auto\_major\_version\_upgrades) | It specifices mysql state of given stage, choies: "planned", "present" ← (default), "absent" | `string` | `present` | no |
 | <a name="input_vp_state"></a> [mysql\_state](#input\_auto\_minor\_version\_upgrades)     | It specifices mysql state of given stage, choies: "planned", "present" ← (default), "absent" | `string`   | `present`    | no |
-## densify Exposed Inputs
+## Densify Exposed Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| densify_recommendations | Map variable containing recommendations from Densify | Map | - | Yes |
-| densify_fallback | The map default values used if Densify recommendations are not available | Map | - | Yes |
+| densify_recommendations | Map variable containing recommendations from Densify| Map(string) |`{"mobile-app-user2":{"recommendedType":"db.m4.large","currentType":"db.m4.xlarge","approvalType":"all","savingsEstimate":"26.6","predictedUptime":"94.32","reservedInstanceCoverage":"yes"}}` | no |
+| densify_fallback | The map default values used if Densify recommendations are not available | Map(string) |`{"recommendedType":"db.m4.large","currentType":"db.m4.large","approvalType":"all","savingsEstimate":"0","predictedUptime":"0"," reservedInstanceCoverage":"no"}` | no |
 | densify_unique_id | The unique identifier of the system to be updated | String | - | Yes |
 
 ## MySQL Exposed Inputs
@@ -178,7 +182,15 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | <a name="input_db_tags"></a> [db\_tags](#input\_db\_tags)                                         | Map of tags to apply to the database instance.                                                                                                                                                                                           | `map(string)` | `"{Owner: "Intel.Cloud.Optimization.Modules@intel.com", Duration: "8"}"` | no |
 
 ## MySQL Terraform Extended Inputs
- ### Usage
+ Below Input variables can be used to extend variables in role, Add or update variable in vars/main.yml file
+### Usage
+
+roles/intel_optimized_mysql_server_ico_by_densify/vars/main.yml
+
+```yaml
+db_engine: "mysql"
+```
+
 roles/intel_optimized_mysql_server_ico_by_densify/tasks/mysql_server.yml
 ```yaml
 ---
@@ -267,9 +279,53 @@ roles/intel_optimized_mysql_server_ico_by_densify/tasks/mysql_server.yml
 | <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Flag to indicate whether a final snapshot will be skipped upon database termination.                                                                                                                                                                                                                                                                                                                                               | `bool`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `false`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID within which the database resource will be created.                                                                                                                                                                                                                                                                                                                                                                         | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes |
 
+## Outputs
 
-
-
+| Name | Description |
+|------|-------------|
+| <a name="output_db_allocated_storage"></a> [db\_allocated\_storage](#output\_db\_allocated\_storage) | Storage that was allocated to the instance when it configured. |
+| <a name="output_db_arn"></a> [db\_arn](#output\_db\_arn) | ARN of the database instance. |
+| <a name="output_db_automated_backup_arn"></a> [db\_automated\_backup\_arn](#output\_db\_automated\_backup\_arn) | The ARN of the automated backup from which to restore. |
+| <a name="output_db_backup_retention"></a> [db\_backup\_retention](#output\_db\_backup\_retention) | Number of configured backups to keep for the database instance. |
+| <a name="output_db_backup_window"></a> [db\_backup\_window](#output\_db\_backup\_window) | Configured backup window for the database instance. |
+| <a name="output_db_ca_cert_identifier"></a> [db\_ca\_cert\_identifier](#output\_db\_ca\_cert\_identifier) | The identifier of the CA certificate for the DB instance. |
+| <a name="output_db_custom_iam_profile"></a> [db\_custom\_iam\_profile](#output\_db\_custom\_iam\_profile) | The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. |
+| <a name="output_db_delete_automated_backups"></a> [db\_delete\_automated\_backups](#output\_db\_delete\_automated\_backups) | Flag that specifies if automated backups are deleted. |
+| <a name="output_db_domain_iam_role"></a> [db\_domain\_iam\_role](#output\_db\_domain\_iam\_role) | The name of the IAM role to be used when making API calls to the Directory Service. |
+| <a name="output_db_encryption"></a> [db\_encryption](#output\_db\_encryption) | Flag that indicates if storage encryption is enabled. |
+| <a name="output_db_endpoint"></a> [db\_endpoint](#output\_db\_endpoint) | Connection endpoint for the database instance that has been created. |
+| <a name="output_db_engine"></a> [db\_engine](#output\_db\_engine) | Database instance engine that was configured. |
+| <a name="output_db_engine_version_actual"></a> [db\_engine\_version\_actual](#output\_db\_engine\_version\_actual) | Running engine version of the database (full version number) |
+| <a name="output_db_final_snapshot_identifier"></a> [db\_final\_snapshot\_identifier](#output\_db\_final\_snapshot\_identifier) | Final snapshot identifier for the database instance. |
+| <a name="output_db_hosted_zone_id"></a> [db\_hosted\_zone\_id](#output\_db\_hosted\_zone\_id) | Hosted zone ID for the database instance. |
+| <a name="output_db_hostname"></a> [db\_hostname](#output\_db\_hostname) | Database instance hostname. |
+| <a name="output_db_iam_auth_enabled"></a> [db\_iam\_auth\_enabled](#output\_db\_iam\_auth\_enabled) | Flag that specifies if iam authenticaiton is enabled on the database |
+| <a name="output_db_instance_id"></a> [db\_instance\_id](#output\_db\_instance\_id) | RDS instance ID. |
+| <a name="output_db_iops"></a> [db\_iops](#output\_db\_iops) | Database instance iops that was configured. |
+| <a name="output_db_kms_key_id"></a> [db\_kms\_key\_id](#output\_db\_kms\_key\_id) | KMS key that is configured on the database instance if storage encryption is enabled. |
+| <a name="output_db_latest_restore_time"></a> [db\_latest\_restore\_time](#output\_db\_latest\_restore\_time) | Latest available restorable time for the database instance. |
+| <a name="output_db_maintenance_window"></a> [db\_maintenance\_window](#output\_db\_maintenance\_window) | Maintainence window for the database instance. |
+| <a name="output_db_max_allocated_storage"></a> [db\_max\_allocated\_storage](#output\_db\_max\_allocated\_storage) | Maximum storage allocation that is configured on the database instance. |
+| <a name="output_db_monitoring_interval"></a> [db\_monitoring\_interval](#output\_db\_monitoring\_interval) | Monitoring interval configuration. |
+| <a name="output_db_name"></a> [db\_name](#output\_db\_name) | Name of the database that was created (if specified) during instance creation. |
+| <a name="output_db_parameter_group"></a> [db\_parameter\_group](#output\_db\_parameter\_group) | Parameter group that was created |
+| <a name="output_db_password"></a> [db\_password](#output\_db\_password) | Database instance master password. |
+| <a name="output_db_performance_insights"></a> [db\_performance\_insights](#output\_db\_performance\_insights) | Flag that indiciates if Performance Insights is enabled. |
+| <a name="output_db_performance_insights_kms_key_id"></a> [db\_performance\_insights\_kms\_key\_id](#output\_db\_performance\_insights\_kms\_key\_id) | ARN of the KMS key that Performance Insights is utilizing (if enabled). |
+| <a name="output_db_performance_insights_retention_period"></a> [db\_performance\_insights\_retention\_period](#output\_db\_performance\_insights\_retention\_period) | Data retention period for Performance Insights (if enabled). |
+| <a name="output_db_port"></a> [db\_port](#output\_db\_port) | Database instance port. |
+| <a name="output_db_restore_time"></a> [db\_restore\_time](#output\_db\_restore\_time) | The date and time to restore from. |
+| <a name="output_db_security_group"></a> [db\_security\_group](#output\_db\_security\_group) | Security Group that was created (if specified) during the run. |
+| <a name="output_db_security_group_ids"></a> [db\_security\_group\_ids](#output\_db\_security\_group\_ids) | Security Group IDs that were associated with the database instance. |
+| <a name="output_db_source_db_instance_id"></a> [db\_source\_db\_instance\_id](#output\_db\_source\_db\_instance\_id) | The identifier of the source DB instance from which to restore. |
+| <a name="output_db_source_dbi_resource_id"></a> [db\_source\_dbi\_resource\_id](#output\_db\_source\_dbi\_resource\_id) | The resource ID of the source DB instance from which to restore. |
+| <a name="output_db_status"></a> [db\_status](#output\_db\_status) | Status of the database instance that was created. |
+| <a name="output_db_storage_type"></a> [db\_storage\_type](#output\_db\_storage\_type) | Storage type that is configured on the database instance. |
+| <a name="output_db_subnet_group"></a> [db\_subnet\_group](#output\_db\_subnet\_group) | Name of the subnet group that is associated with the database instance. |
+| <a name="output_db_username"></a> [db\_username](#output\_db\_username) | Database instance master username. |
+| <a name="output_instance_class"></a> [instance\_class](#output\_instance\_class) | Instance class in use for the database instance that was created. |
+<!-- END_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Outputs
 
 | Name | Description |
