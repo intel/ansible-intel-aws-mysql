@@ -15,25 +15,26 @@ As you configure your application's environment, choose the configurations for y
 The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
 ## Installation of `intel_optimized_mysql_server_replica_testing` role
-
-There are three ways to use it.
-1. Install collection using Ansible Galaxy (Use as third party collection, installed in default location), Use below command to installed collection
+### Below are ways to `How to install and use it`
+1. **Case 1:-** Install collection using Ansible Galaxy (Use as third party collection, installed in default location), Use below command to installed collection
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
    
-2. Install collection using Ansible Galaxy (Installed in given location), Use below command to installed collection
-    ```commandline
-    ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
-    ```
-    Note: collection will download all roles, you can remove as per need
+2. **Case 2:-** Install collection using Ansible Galaxy (Installed in given location), Use below command to installed collection
+   
+    1.
+       ```commandline
+       ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
+       ```
+       Note: collection will download collection, you can remove as per need
 
-3. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
-    ```commandline
-    git clone <TBD>
-    cd ansible-intel-aws-mysql
-    cp -r role/intel_optimized_mysql_server_replica_testing /<your project path>/
-    ```
+   2. Download source and Copy role directory to your Ansible  boilerplate  from GitHub (Used to extended behavior of role)  
+       ```commandline
+       git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
+       cd ansible-intel-aws-mysql
+       cp -r role/intel_optimized_mysql_server_replica_testingon /<your project path>/
+       ``` 
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_replica_testing as below
@@ -98,6 +99,12 @@ Use below Command:
 ```commandline
 ansible-playbook intel_optimized_mysql_server_replica_testing.yml
 ```
+#### State - absent (terraform destroy)
+> [!WARNING]  
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
+> it needs be deleted resources in sequential order.
+> This role creates a VPC and assigns it to a MySQL instance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL instance being deleted first and the VPC being deleted second.
+
 #### Step 2: Deleting MYSQL server
 ```yaml
 ---
@@ -134,7 +141,7 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | Name                                                                                        |
 |---------------------------------------------------------------------------------------------|
 
-| [terraform-intel-aws-mysql](<https://github.com/intel/terraform-intel-aws-mysql/blob/main>) |
+[terraform-intel-aws-mysql](<https://github.com/intel/terraform-intel-aws-mysql/blob/main>) 
 
 # Ansible
 
@@ -151,12 +158,18 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 |----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------|:--------:|
 | <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `"mysql-devpt"`                                                                 | no |
 
-
 ## MySQL Replica Exposed Inputs
 
 | Name                                                                                               | Description                                                                                                                                                                                                                              | Type          | Default                                                                  | Required |
 |----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------|:--------:|
-| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `"mysqlrt"`                                                                 | no |
+| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `mysql-dev-densify`                                                                 | no |
+| <a name="input_db_tags"></a> [skip_final_snapshot](#input\_db\_tags)                                         |  Flag to indicate whether a final snapshot will be skipped upon database termination.                                                                                                                                                                                           | `boolean` | `True` | no |
+ <a name="input_db_tags"></a> [create_subnet_group](#input\_db\_tags)                                         | Flag that allows for the creation of a subnet group that allows public access.                                                                                                                                                                                           | `bool` | `False` | no |
+
+
+
+
+
 
 
 ## MySQL Terraform Extended Inputs
@@ -182,6 +195,7 @@ roles/intel_optimized_mysql_server_replica_testing/tasks/mysql.yml
       rds_identifier: "{{ rds_identifier }}"
       db_password: "{{ db_password }}"
       vpc_id: "{{ vpc_id }}"
+      db_engine: '{{ db_engine }}'
   register: mysql_output 
 
 - set_fact:
@@ -195,29 +209,7 @@ roles/intel_optimized_mysql_server_replica_testing/tasks/mysql.yml
     - "db_instance_id: {{ db_instance_id }}"
     - "db_kms_key_id: {{ db_kms_key_id }}"
 ```
-roles/intel_optimized_mysql_server_replica_testing/tasks/mysql_replica.yml
-```yaml
 
----
-- name: optimized mysql server read replica
-  community.general.terraform:
-    project_path: '{{ mysql_server_tf_module_path_replica }}'
-    state: '{{ mysql_rep_state }}'
-    force_init: true
-    complex_vars: true
-    variables:
-      rds_identifier: "{{ rds_identifier_replica }}"
-      db_password: "{{ db_password }}"
-      vpc_id: "{{ vpc_id }}"
-      db_replicate_source_db: "{{ db_instance_id }}"
-      kms_key_id: "{{ db_kms_key_id }}"
-      skip_final_snapshot: true
-      create_subnet_group: false
-  register: mysql_replica_output 
-
-- debug:
-    var: mysql_replica_output
-```
 
 ## Inputs
 
