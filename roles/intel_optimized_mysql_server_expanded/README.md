@@ -26,6 +26,7 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
    
 2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
    Use below approaches
+
    1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
