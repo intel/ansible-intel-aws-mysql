@@ -1,6 +1,0 @@
----
-- name: 'Check mandatory variables are defined'
-  assert:
-    that:
-      - vpc_id is defined
-      - db_password is defined

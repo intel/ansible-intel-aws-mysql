@@ -20,4 +20,4 @@
 
 -  debug:
      var: densify_data
-   when: densify_data | length > 0
+   when: densify_output.outputs | length > 0 and densify_state == "present"

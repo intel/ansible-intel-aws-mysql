@@ -152,7 +152,6 @@ For this module, There are 6 playbooks, Where
         └── vars
             └── main.yml
 
-
 ```
 
 ## Installation of collection
@@ -426,5 +425,4 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | <a name="output_db_username"></a> [db\_username](#output\_db\_username) | Database instance master username. |
 | <a name="output_instance_class"></a> [instance\_class](#output\_instance\_class) | Instance class in use for the database instance that was created. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 
