@@ -36,9 +36,9 @@ For this module, There are 5 roles.
 For this module, There are 6 playbooks, Where
 1. Playbook **intel_aws_mysql.yml** - Used to create an Amazon RDS Intel optimized instance for MySQL, it uses Terraform module **terraform-intel-aws-mysql** and being called by Ansible module community.general.terraform
 2. Playbook **intel_optimized_mysql_server.yml** - It executes role called [intel_optimized_mysql_server](#intel_optimized_mysql_server)
-3. Playbook **intel-optimized_mysql_ico_by_densify.yml** - It executes role called [intel-optimized-mysql-ico-by-densify](#intel-optimized-mysql-ico-by-densify)
-4. Playbook **intel_optimized_mysql_server_vpc_creation.yml** - It executes role called [intel_optimized_mysql_server_vpc_creation](#intel_optimized_mysql_server_vpc_creation)
-5. Playbook **intel_optimized_mysql_server.yml** - It executes role called [intel_optimized_mysql_server](#intel_optimized_mysql_server)
+3. Playbook **intel_optimized_mysql_server_expanded.yml** - It executes role called [intel_optimized_mysql_server_expanded](#intel_optimized_mysql_server_expanded)
+4. Playbook **intel-optimized_mysql_ico_by_densify.yml** - It executes role called [intel-optimized-mysql-ico-by-densify](#intel-optimized-mysql-ico-by-densify)
+5. Playbook **intel_optimized_mysql_server_vpc_creation.yml** - It executes role called [intel_optimized_mysql_server_vpc_creation](#intel_optimized_mysql_server_vpc_creation)
 6. Playbook **intel_optimized_mysql_server_replica_testing.yml**:- It executes role called [intel_optimized_mysql_server_replica_testing](#intel_optimized_mysql_server_replica_testing)
 
 ```bash
