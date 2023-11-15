@@ -9,4 +9,4 @@ tags:
   - ansible
   - aws
   - mysql
-repository: 'https://github.com/intel/terraform-intel-aws-mysql' # TODO: change name repo
+repository: 'https://github.com/OTCShare2/ansible-intel-aws-mysql' # TODO: change name repo
