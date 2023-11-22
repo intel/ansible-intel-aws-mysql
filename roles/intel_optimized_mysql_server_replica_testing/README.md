@@ -38,7 +38,7 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Usage
 Use playbook to run intel_optimized_mysql_server_replica_testing as below
-```ansible
+```yaml
 ---
 - name: Run intel_optimized_mysql_server_replica_testing role
   hosts: localhost
@@ -160,16 +160,11 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 
 ## MySQL Replica Exposed Inputs
 
-| Name                                                                                               | Description                                                                                                                                                                                                                              | Type          | Default                                                                  | Required |
-|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------------------------------------------------------------|:--------:|
-| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier)                      | Name of the RDS instance that will be created.                                                                                                                                                                                           | `string`      | `mysqlrt`                                                                 | no |
-| <a name="input_db_tags"></a> [skip_final_snapshot](#input\_db\_tags)                                         |  Flag to indicate whether a final snapshot will be skipped upon database termination.                                                                                                                                                                                           | `boolean` | `True` | no |
- <a name="input_db_tags"></a> [create_subnet_group](#input\_db\_tags)                                         | Flag that allows for the creation of a subnet group that allows public access.                                                                                                                                                                                           | `bool` | `False` | no |
-
-
-
-
-
+| Name                                                                          | Description                                                                          | Type      | Default   | Required |
+|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------|-----------|:--------:|
+| <a name="input_rds_identifier"></a> [rds\_identifier](#input\rds\_identifier) | Name of the RDS instance that will be created.                                       | `string`  | `mysqlrt` |    no    |
+| <a name="input_db_tags"></a> [skip_final_snapshot](#input\_db\_tags)          | Flag to indicate whether a final snapshot will be skipped upon database termination. | `boolean` | `True`    |    no    |
+| <a name="input_db_tags"></a> [create_subnet_group](#input\_db\_tags)          | Flag that allows for the creation of a subnet group that allows public access.       | `bool`    | `False`   |    no    |
 
 
 ## MySQL Terraform Extended Inputs
@@ -196,20 +191,27 @@ roles/intel_optimized_mysql_server_replica_testing/tasks/mysql.yml
       db_password: "{{ db_password }}"
       vpc_id: "{{ vpc_id }}"
       db_engine: '{{ db_engine }}'
-  register: mysql_output 
-
-- set_fact:
-    db_instance_id: '{{ mysql_output.outputs.db_instance_id.value }}'
-    db_kms_key_id: '{{ mysql_output.outputs.db_kms_key_id.value }}' 
-  when: mysql_output.outputs | length > 0
-
-- name: Prints two lines of messages, but only if there is an environment value set
-  ansible.builtin.debug:
-    msg:
-    - "db_instance_id: {{ db_instance_id }}"
-    - "db_kms_key_id: {{ db_kms_key_id }}"
+  register: mysql_output
 ```
 
+
+Use `db_engine` in playbook 
+```yaml
+---
+- name: Run intel_optimized_mysql_server_replica_testing role
+  hosts: localhost
+  tasks:
+    - name: Running a role intel_optimized_mysql_server_replica_testing creation
+      ansible.builtin.import_role:
+        name: intel_optimized_mysql_server_replica_testing
+      vars:
+        mysql_state: present
+        mysql_rep_state: present
+        db_password: <db_password>
+        vpc_id: <vpc_id>
+        db_engine: <value>
+        
+```
 
 ## Inputs
 

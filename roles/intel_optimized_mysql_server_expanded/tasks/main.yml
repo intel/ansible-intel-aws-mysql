@@ -1,5 +1,5 @@
 ---
-# tasks file for intel_optimized_mysql_server_vpc_creation
+# tasks file for intel_optimized_mysql_server_expanded
 - name: Download Terraform modules
   ansible.builtin.include_tasks:
     file: download_tf_module.yml

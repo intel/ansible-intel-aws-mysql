@@ -298,11 +298,11 @@ ansible-playbook intel_aws_mysql.yml
 
 | Role Name                                                                                                                                                          |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [intel_optimized_mysql_server](https://github.com/intel/terraform-intel-aws-mysql/tree/main/examples/intel-optimized-mysql-server)                                 | role |
-| [intel_optimized_mysql_server_expanded](https://github.com/intel/terraform-intel-aws-mysql/tree/main/examples/intel-optimized-mysql-server-expanded)               |
-| [intel_optimized_mysql_server_ico_by_densify](https://github.com/intel/terraform-intel-aws-mysql/tree/main/examples/intel-optimized-mysql-server-ico-by-densify)   |
-| [intel_optimized_mysql_server_vpc_creation](https://github.com/intel/terraform-intel-aws-mysql/tree/main/examples/intel-optimized-mysql-server-vpc-creation)       |
-| [intel_optimized_mysql_server_replica_testing](https://github.com/intel/terraform-intel-aws-mysql/tree/main/examples/intel-optimized-mysql-server-replica_testing) |
+| [intel_optimized_mysql_server](https://github.com/OTCShare2/ansible-intel-aws-mysql/tree/main/roles/intel_optimized_mysql_server)                                  | role |
+| [intel_optimized_mysql_server_expanded](https://github.com/OTCShare2/ansible-intel-aws-mysql/tree/main/roles/intel_optimized_mysql_server_expanded)               |
+| [intel_optimized_mysql_server_ico_by_densify](https://github.com/OTCShare2/ansible-intel-aws-mysql/tree/main/roles/intel_optimized_mysql_server_ico_by_densify)   |
+| [intel_optimized_mysql_server_vpc_creation](https://github.com/OTCShare2/ansible-intel-aws-mysql/tree/main/roles/intel_optimized_mysql_server_vpc_creation)       |
+| [intel_optimized_mysql_server_replica_testing](https://github.com/OTCShare2/ansible-intel-aws-mysql/tree/main/roles/intel_optimized_mysql_server_replica_testing) |
 
 
 Requirements

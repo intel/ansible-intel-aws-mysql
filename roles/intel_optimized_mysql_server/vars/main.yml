@@ -1,5 +1,5 @@
 ---
-# vars file for intel_optimized_mysql_server_vpc_creation
+# vars file for intel_optimized_mysql_server
 # build in
 role_name: '{{ role_path | basename }}'
 
