@@ -15,21 +15,21 @@ As you configure your application's environment, choose the configurations for y
 The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
 ## Installation of `intel_optimized_mysql_server_replica_testing` role
-### Below are ways to `How to install and use it`
-1. **Case 1:-** Install collection using Ansible Galaxy (Use as third party collection, installed in default location), Use below command to installed collection
+### Below are ways to install and use it:
+1. **Case 1:-** Install collection using Ansible Galaxy (Use as third party collection, installed in default location), use below command to installed collection:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
-   
-2. **Case 2:-** Install collection using Ansible Galaxy (Installed in given location), Use below command to installed collection
-   
+
+2. **Case 2:-** Install collection using Ansible Galaxy (Installed in given location), use below command to installed collection:
+
     1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
        ```
-       Note: collection will download collection, you can remove as per need
+       Note: collection will download collection, you can remove as per need.
 
-   2. Download source and Copy role directory to your Ansible  boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download source and copy role directory to your Ansible  boilerplate  from GitHub (Used to extended behavior of role)  
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
@@ -101,7 +101,7 @@ ansible-playbook intel_optimized_mysql_server_replica_testing.yml
 ```
 #### State - absent (terraform destroy)
 > [!WARNING]  
-> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>),
 > it needs be deleted resources in sequential order.
 > This role creates MySQL instance and MySQL Replica intance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL Replica instance being deleted first and the MySql intance being deleted second.
 

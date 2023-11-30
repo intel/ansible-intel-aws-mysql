@@ -16,24 +16,24 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Installation of `intel_optimized_mysql_server_vpc_creation` role
 
-### Below are ways to `How to install and use it`
+### Below are ways to install and use it:
 
-1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
+1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
-   
-2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
-   Use below approaches
+
+2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, they can install collection using Ansible Galaxy in user's define location
+   Use below approaches:
 
    1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
        ```
-       Note: collection will download collection, you can remove as per need
+       Note: collection will download collection, you can remove as per need.
 
-   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download source and copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
@@ -81,11 +81,11 @@ ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
 
 #### State - absent (terraform destroy)
 > [!WARNING]  
-> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>),
 > it needs be deleted resources in sequential order.
 > This role creates a VPC and assigns it to a MySQL instance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL instance being deleted first and the VPC being deleted second.
 
-#### Step 1: Deleting MySQL Instance 
+#### Step 1: Deleting MySQL Instance
 ```yaml
 - name: Run intel_optimized_mysql_server_vpc_creation role
   hosts: localhost
@@ -103,7 +103,7 @@ Use below Command:
 ansible-playbook intel_optimized_mysql_server_vpc_creation.yml
 ```
 
-#### Step 2: Deleting VPC Instance 
+#### Step 2: Deleting VPC Instance
 ```yaml
 - name: Run intel_optimized_mysql_server_vpc_creation role
   hosts: localhost
@@ -148,7 +148,7 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | <a name="input_vp_state"></a> [vpc\_state](#input\_auto\_minor\_version\_upgrades)     | It specifices mysql state of given stage, choies: "planned", "present" ← (default), "absent" | `string`   | `present`    | no |
 
 
-## VPC Exposed Inputs 
+## VPC Exposed Inputs
 
 | Name                                                                                            | Description                                                                                                                                       | Type          | Default                                                              | Required |
 |-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------------|:--------:|

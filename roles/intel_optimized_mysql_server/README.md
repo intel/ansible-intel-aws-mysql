@@ -16,24 +16,24 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Installation of `intel_optimized_mysql_server` role
 
-### Below are ways to `How to install and use it`
+### Below are ways to install and use it:
 
-1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
+1. **Case 1:-** When a user's needs can be met with the default configuration, and they want to install a collection
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
-   
-2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
-   Use below approaches
+
+2. **Case 2:-** When a user's needs can't be met with the default configuration or want to extend/modify existing configuration and flow, They can install a collection using Ansible Galaxy in the user's defined location.       
+   Use below approaches:
 
    1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
        ```
-       Note: collection will download collection, you can remove as per need
+       Note: The collection will download collection, you can remove it as needed.
 
-   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download the source and copy the role directory to your Ansible boilerplate  from GitHub  (Used to extended behavior of role)  
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
@@ -159,7 +159,7 @@ roles/intel_optimized_mysql_server/tasks/mysql_server.yml
       db_engine: '{{ db_engine }}'
 ```
 
-Use `db_engine` in playbook 
+Use `db_engine` in playbook
 ```yaml
 ---
 - name: Run intel_optimized_mysql_server role
@@ -173,7 +173,7 @@ Use `db_engine` in playbook
         db_password: "Passwort!123"
         vpc_id: <vpc_id>
         db_engine: <value>
-        
+
 ```
 
 ## Inputs

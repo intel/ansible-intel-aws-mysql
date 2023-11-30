@@ -10,30 +10,30 @@
 
 Configuration in this directory creates an Amazon RDS instance for MySQL and optimizes the database parameter innodb_open_files. The instance is created on an Intel Icelake instance M6i.xlarge by default. The instance is pre-configured with parameters within the database parameter group that is optimized for Intel architecture. The goal of this module is to get you started with a database configured to run best on Intel architecture.
 
-As you configure your application's environment, choose the configurations for your infrastructure that matches your application's requirements.
+As you configure your application's environment, choose the configurations for your infrastructure that match your application's requirements.
 
 The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
 ## Installation of `intel_optimized_mysql_server_expanded` role
 
-### Below are ways to `How to install and use it`
+### Below are ways to install and use it:
 
 1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
-   
-2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
-   Use below approaches
+
+2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, they can install collection using Ansible Galaxy in user's define location
+   Use below approaches:
 
    1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
        ```
-       Note: collection will download collection, you can remove as per need
+       Note: collection will download collection, you can remove as per need.
 
-   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download source and copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
@@ -138,7 +138,7 @@ Note: Above role requires `Terraform` as we are executing terraform module [terr
 | <a name="input_db_password"></a> [db\_password](#input\db\_password)   | MySQL instance master password.                                                                                                                                                                                          | `string`      | `null`               |    yes    |
 
 ## MySQL Terraform Extended Inputs
- Below Input variables can be used to extend variables in role, Add or update variable in vars/main.yml file
+ Below input variables can be used to extend variables in role, add or update variable in vars/main.yml file
 ### Usage
 
 roles/intel_optimized_mysql_server_expanded/vars/main.yml
@@ -175,7 +175,7 @@ Use `db_engine` in playbook
         db_password: "Passwort!123"
         vpc_id: <vpc_id>
         db_engine: <value>
-        
+
 ```
 ## Inputs
 

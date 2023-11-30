@@ -14,7 +14,7 @@
 
 Configuration in this directory creates an Amazon RDS Intel optimized instance for MySQL using recommended instance from Intel Cloud Optimizer by Densify.
 
-Intel® Cloud Optimizer is a collaboration between Densify and Intel targeted at getting you the most from your cloud investment. 
+Intel® Cloud Optimizer is a collaboration between Densify and Intel targeted at getting you the most from your cloud investment.
 
 Intel Cloud Optimizer by Densify helps customers optimize their cloud investments and ensure optimal performance for every workload.
 
@@ -36,7 +36,7 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
 
 ## Installation of `intel_optimized_mysql_server_ico_by_densify` role
 
-### Below are ways to `How to install and use it`
+### Below are ways to install and use it:
 
 1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
@@ -44,16 +44,16 @@ The MySQL Optimizations were based off [Intel Xeon Tunning guides](<https://www.
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
    
-2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
+2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location.
    Use below approaches
 
    1.
        ```commandline
        ansible-galaxy  collection install -p <local path> <intel.ansible-intel-aws-mysql>
        ```
-       Note: collection will download collection, you can remove as per need
+       Note: collection will download collection, you can remove as per need.
 
-   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download source and copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
@@ -107,7 +107,7 @@ ansible-playbook intel_optimized_mysql_server_ico_by_densify.yml
 ```
 #### State - absent (terraform destroy)
 > [!WARNING]  
-> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>), 
+> When roles includes multiple Terraform modules executing via Ansible module [community.general.terraform](<https://docs.ansible.com/ansible/latest/collections/community/general/terraform_module.html>),
 > it needs be deleted resources in sequential order.
 > This role creates a densify and assigns it to a MySQL instance. Therefore, when deleting the resources, they must be deleted in sequential order, with the MySQL instance being deleted first and the densify being deleted second.
 
@@ -216,7 +216,7 @@ roles/intel_optimized_mysql_server_ico_by_densify/tasks/mysql_server.yml
   register: mysql_output
 ```
 
-Use `db_engine` in playbook 
+Use `db_engine` in playbook
 ```yaml
 ---
 -  name: Playbook using the intel_optimized_mysql_server_ico_by_densify role
