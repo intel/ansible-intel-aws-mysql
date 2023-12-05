@@ -1,0 +1,17 @@
+---
+# vars file for intel_optimized_mysql_server
+# build in
+role_name: '{{ role_path | basename }}'
+
+# required
+db_password: '{{ db_password }}'  # "Password for the master database user."
+vpc_id: '{{ vpc_id }}'
+
+# optional
+vpc_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/vpc/'
+mysql_server_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql/'
+
+## mysql server
+mysql_state: present
+rds_identifier: "mysql-dev-basic"
+

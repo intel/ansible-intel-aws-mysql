@@ -1,0 +1,21 @@
+---
+# vars file for intel_optimized_mysql_server_expanded.yml
+# build in
+role_name: '{{ role_path | basename }}'
+
+# required
+db_password: '{{ db_password }}'  # "Password for the master database user."
+vpc_id: '{{ vpc_id }}'
+
+# optional
+vpc_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/vpc/'
+mysql_server_tf_module_path: '/home/{{ansible_env.USER}}/{{ role_name }}/terraform/aws_mysql/'
+
+## mysql server
+mysql_state: present
+rds_identifier: "mysql-dev-expanded"
+db_parameters:
+  mysql:
+    innodb_open_files:
+      apply_method: "pending-reboot"
+      value: "3000"

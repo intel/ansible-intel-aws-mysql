@@ -1,0 +1,4 @@
+---
+# defaults file for intel_optimized_mysql_server_vpc_creation
+vpc_tf_source: https://github.com/terraform-aws-modules/terraform-aws-vpc.git
+mysql_server_tf_source: https://github.com/intel/terraform-intel-aws-mysql.git

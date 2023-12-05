@@ -1,0 +1,25 @@
+---
+# tasks for optimized-mysql-server CURD operations
+- debug:
+    var: vpc_id
+
+# TF module "optimized-mysql-server"
+- name: Optimized mysql server
+  community.general.terraform:
+    project_path: '{{ mysql_server_tf_module_path }}'
+    state: '{{ mysql_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      vpc_id: '{{ vpc_id }}'
+      db_password: '{{ db_password }}'
+      rds_identifier: '{{ rds_identifier }}'
+      multi_az: '{{ db_multi_az }}'
+      create_subnet_group: '{{ db_create_subnet_group }}'
+      db_subnet_group_name: '{{ db_subnet_group_name }}'
+      db_tags: '{{ db_tags }}'
+      ingress_cidr_blocks: '{{ db_ingress_cidr_blocks }}'
+  register: mysql_output
+
+- debug:
+    var: mysql_output

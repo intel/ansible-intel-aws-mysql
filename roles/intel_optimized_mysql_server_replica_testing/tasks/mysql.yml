@@ -1,0 +1,23 @@
+---
+- name: optimized mysql server
+  community.general.terraform:
+    project_path: '{{ mysql_server_tf_module_path }}'
+    state: '{{ mysql_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      rds_identifier: "{{ rds_identifier }}"
+      db_password: "{{ db_password }}"
+      vpc_id: "{{ vpc_id }}"
+  register: mysql_output 
+
+- set_fact:
+    db_instance_id: '{{ mysql_output.outputs.db_instance_id.value }}'
+    db_kms_key_id: '{{ mysql_output.outputs.db_kms_key_id.value }}' 
+  when: mysql_output.outputs | length > 0
+
+- name: Prints two lines of messages, but only if there is an environment value set
+  ansible.builtin.debug:
+    msg:
+    - "db_instance_id: {{ db_instance_id }}"
+    - "db_kms_key_id: {{ db_kms_key_id }}"

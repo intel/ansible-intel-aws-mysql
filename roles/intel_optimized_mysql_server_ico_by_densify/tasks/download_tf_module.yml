@@ -1,0 +1,16 @@
+- name: Clone a github repository {{ mysql_server_tf_source|basename }}
+  ansible.builtin.git:
+    repo: '{{ mysql_server_tf_source }}'
+    dest: '{{ mysql_server_tf_module_path }}'
+    clone: yes
+    update: yes
+    version: main
+
+- name: Clone a github repository {{ densify_tf_source|basename }}
+  ansible.builtin.git:
+    repo: '{{ densify_tf_source }}'
+    dest: '{{ densify_tf_module_path }}'
+    clone: yes
+    update: yes
+    version: v2.0.3
+    force: true

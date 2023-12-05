@@ -1,0 +1,15 @@
+---
+- name: optimized mysql server
+  community.general.terraform:
+    project_path: '{{ mysql_server_tf_module_path }}'
+    state: '{{ mysql_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      vpc_id: '{{ vpc_id }}'
+      db_password: '{{ db_password }}'
+      rds_identifier: '{{ rds_identifier }}'
+      instance_class: '{{ densify_data.instance_type.value }}'
+      db_tags: '{{ db_tags }}'
+  register: mysql_output
+

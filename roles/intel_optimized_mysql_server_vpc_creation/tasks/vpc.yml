@@ -1,0 +1,27 @@
+---
+# tasks for vpc CURD operations
+# TF module "vpc"
+- name: vpc
+  community.general.terraform:
+    project_path: '{{ vpc_tf_module_path}}'
+    state: '{{ vpc_state }}'
+    force_init: true
+    complex_vars: true
+    variables:
+      name: '{{ vpc_name }}'
+      cidr: '{{ vpc_cidr }}'
+      azs: '{{ vpc_azs }}'
+      private_subnets: '{{ vpc_private_subnets }}'
+      tags: '{{ vpc_tags }}'
+  register: vpc_output
+
+- debug:
+    var: vpc_output
+
+- set_fact:
+    vpc_id: '{{ vpc_output.outputs.vpc_id.value }}'
+  when: vpc_output.outputs | length > 0
+
+- debug:
+    var: vpc_id
+  when: vpc_output.outputs | length > 0 and vpc_state == "present"
