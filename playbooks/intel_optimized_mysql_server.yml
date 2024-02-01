@@ -8,4 +8,4 @@
       vars:
         mysql_state: present
         db_password: "Passwort!123"
-        vpc_id: vpc-091a18706e91c1f55
+        vpc_id: "vpc-5ea60f23""

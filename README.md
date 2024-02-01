@@ -2,9 +2,9 @@
   <img src="https://github.com/intel/terraform-intel-aws-mysql/blob/main/images/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-# Intel® Cloud Optimization Modules for Ansible
+# Intel® Optimized Cloud Modules for Ansible
 
-© Copyright 2023, Intel Corporation
+© Copyright 2024, Intel Corporation
 
 ## AWS RDS MySQL module
 
@@ -14,10 +14,10 @@ As you configure your application's environment, choose the configurations for y
 
 The MySQL Optimizations were based off [Intel Xeon Tuning Guide](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
-### Explained Ansible AWS RDS MySQL collection
+## Explanation of this Ansible AWS RDS MySQL collection
 This collection included 5 roles and 6 playbooks.
 
-**Role**:- Ansible roles are a way to reuse and organize your Ansible code. They are self-contained units that contain all the files and configuration needed to automate a specific task.
+**Role**: Ansible roles are a way to reuse and organize your Ansible code. They are self-contained units that contain all the files and configuration needed to automate a specific task.
 Roles are defined using a directory structure with specific directories for tasks, variables, files, templates, and other artifacts. This structure makes it easy to find and reuse code, and it also makes it easy to extend behaviour of roles.
 
 To use a role in an Ansible playbook, you simply need to list it in the roles section of the playbook. Ansible will then automatically load the role and execute its tasks.
@@ -29,8 +29,7 @@ For this module, There are 5 roles.
 4. <a name="intel_optimized_mysql_server_vpc_creation"> intel_optimized_mysql_server_vpc_creation</a> It creates an Amazon RDS instance for MySQL and a new VPC
 5. <a name="intel_optimized_mysql_server_replica_testing"> intel_optimized_mysql_server_replica_testing</a> It creates an Amazon RDS instance for MySQL and creates a read replica.
 
-**
-****Playbook**:- An Ansible playbook is a YAML file that describes the tasks, are composed of a series of plays, which are groups of tasks that are executed in a specific order. Each play defines a set of tasks that should be executed on a specific group of hosts.
+**Playbook**: An Ansible playbook is a YAML file that describes the tasks, are composed of a series of plays, which are groups of tasks that are executed in a specific order. Each play defines a set of tasks that should be executed on a specific group of hosts.
          Playbooks can also include variables, which can be used to store data that is used by the tasks. This makes it easy to reuse playbooks for different environments and configurations.
          for this module. 
 For this module, There are 6 playbooks, Where
@@ -40,6 +39,8 @@ For this module, There are 6 playbooks, Where
 4. Playbook **intel_optimized_mysql_ico_by_densify.yml** - It executes role called [intel-optimized-mysql-ico-by-densify](#intel-optimized-mysql-ico-by-densify)
 5. Playbook **intel_optimized_mysql_server_vpc_creation.yml** - It executes role called [intel_optimized_mysql_server_vpc_creation](#intel_optimized_mysql_server_vpc_creation)
 6. Playbook **intel_optimized_mysql_server_replica_testing.yml**:- It executes role called [intel_optimized_mysql_server_replica_testing](#intel_optimized_mysql_server_replica_testing)
+
+## Code Structure
 
 ```bash
 ├── CODE_OF_CONDUCT.md
@@ -165,15 +166,15 @@ For this module, There are 6 playbooks, Where
 
 ## Installation of collection
 
-### Below are ways to `How to install and use it`
+### Deployment options
 
-1. **Case 1:-** When user's needs can be met with the default configuration, and they want to install a collection 
+1. **Case 1:** When user's needs can be met with the default configuration, and they want to install a collection 
    from Ansible Galaxy to the default location (as a third-party collection), it is recommended to use the following command:
     ```commandline
         ansible-galaxy  collection install <intel.ansible-intel-aws-mysql>
     ```
    
-2. **Case 2:-** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
+2. **Case 2:** When user's needs can't be met with the default configuration, wants to extend/modify existing configuration and flow, They can install collection using Ansible Galaxy in user's define location
    Use below approaches
 
    1.
@@ -182,14 +183,15 @@ For this module, There are 6 playbooks, Where
        ```
        Note: collection will download collection, you can remove as per need
 
-   2. Download source and Copy role directory to your Ansible boilerplate  from GitHub (Used to extended behavior of role)  
+   2. Download the source code and copy role the directories to your Ansible location in your working directory.
        ```commandline
        git clone https://github.com/OTCShare2/ansible-intel-aws-mysql.git
        cd ansible-intel-aws-mysql
        cp -r role/intel_optimized_mysql_server_vpc_creation /<your project path>/
        ```
+      (Example: /home/user/.ansible/roles)
 
-## Authenticate AWS 
+## Authentication for AWS 
 To authenticate AWS API, User needs to export below environment variable
 ```bash
 export AWS_ACCESS_KEY_ID=<aws_access_key_id>
@@ -243,12 +245,27 @@ Use [playbook](playbooks/intel_aws_mysql.yml) to execute Terraform module [terra
     - debug:
         var: mysql_output
 ```
-Use below Command:
+### Update the variables
+  Each of the playbooks have .yml files that you will need to update to insert items like VPC ID, and database settings
+
+### Execution
+ansible-playbook <playbookname.yml>
+
+EXAMPLE
 ```commandline
 ansible-playbook intel_aws_mysql.yml
 ```
+### Deployment Time
+Deployment time can vary but in most cases it takes approximately 15-20 minutes for the RDS database to be created or destroyed.
 
 ## Run Ansible with Different State
+You can deploy ansible in various states, similar to Terraform.  These are used as variables in the "state" section of the code.  There are 3 types, planned, present, absent.<br>
+
+**planned** = will display what will be executed by does not deploy<br>
+**present** = deploys the resources<br>
+**absent** = destroys what was created using the present setting<br>
+
+EXAMPLES:
 #### State - planned (terraform plan)
 ```yaml
 - name: AWS RDS MySQL Module
