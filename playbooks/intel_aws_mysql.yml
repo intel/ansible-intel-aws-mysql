@@ -16,7 +16,7 @@
     - name: AWS RDS MySQL Module
       community.general.terraform:
         project_path: '{{ terraform_module_download_path }}'
-        state: absent
+        state: present
         force_init: true
         complex_vars: true
         # for additional variables
