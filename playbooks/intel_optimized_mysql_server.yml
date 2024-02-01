@@ -7,5 +7,5 @@
         name: intel_optimized_mysql_server
       vars:
         mysql_state: present
-        db_password: "Passwort!123"
-        vpc_id: "vpc-5ea60f23""
+        db_password: "<yourpassword>"
+        vpc_id: "<yourvpcid>""
