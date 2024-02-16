@@ -8,7 +8,7 @@
         vars:
           densify_state: present
           mysql_state: present
-          vpc_id : "vpc-091a18706e91c1f55"
-          db_password: "Calsoft#123"
-          rds_identifier: "demo"
+          vpc_id : "<yourvpcid>"
+          db_password: "<yourpassword>"
+          rds_identifier: "my_rds"
 

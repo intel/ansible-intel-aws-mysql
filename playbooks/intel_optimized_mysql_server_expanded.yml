@@ -7,9 +7,9 @@
         name: intel_optimized_mysql_server_expanded
       vars:
         mysql_state: present
-        db_password: "Passwort!123"
-        vpc_id: vpc-091a18706e91c1f55
-#        rds_identifier: "mysql-dev-expanded"
+        db_password: "<yourpassword>"
+        vpc_id: "<yourvpcid>"
+        rds_identifier: "mysql-dev-expanded"
 #        db_parameters:
 #          mysql:
 #            innodb_open_files:

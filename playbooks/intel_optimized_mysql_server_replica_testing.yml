@@ -8,6 +8,6 @@
       vars:
         mysql_state: present
         mysql_rep_state: present
-        db_password: <db_password>
-        vpc_id: <vpc_id>
+        db_password: "<yourpassword>"
+        vpc_id: "<yourvpcid>"
         

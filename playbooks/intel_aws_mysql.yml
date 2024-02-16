@@ -22,11 +22,11 @@
         # for additional variables
         # https://github.com/intel/terraform-intel-aws-mysql/blob/main/variables.tf
         variables:
-          vpc_id: <vpc_id>
-          db_password: <db_password>
+          vpc_id: "<yourvpcid>"
+          db_password: "<yourpassword>"
           db_engine: mysql
-          rds_identifier: <rds_identifier>
-          db_subnet_group_name: <db_subnet_group_name>
+          rds_identifier: "my-sql-rds"
+          db_subnet_group_name: "test"
           db_encryption: false
           db_allocated_storage: 20
           db_storage_type: "gp2"
