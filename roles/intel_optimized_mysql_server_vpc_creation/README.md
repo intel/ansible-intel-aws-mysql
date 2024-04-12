@@ -2,9 +2,9 @@
   <img src="https://github.com/intel/terraform-intel-aws-mysql/blob/main/images/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-# Intel® Cloud Optimization Modules for Ansible
+# Intel® Optmized Cloud Modules for Ansible
 
-© Copyright 2023, Intel Corporation
+© Copyright 2024, Intel Corporation
 
 ## AWS RDS MySQL module - New VPC Creation
 
